@@ -10,7 +10,7 @@ This Python script allows you to schedule a shutdown either at a specific time o
 
 ## Requirements
 
-- Python 3.x
+- Python 3.8 or later
 
 ## Usage
 
@@ -30,3 +30,4 @@ This Python script allows you to schedule a shutdown either at a specific time o
 
 ## License
 
+<h3>This program is licensed on GPL-3.0 license</h3> which granting you the freedom to use, modify, and redistribute the software under the same license terms.

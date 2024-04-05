@@ -14,7 +14,7 @@ This Python script allows you to schedule a shutdown either at a specific time o
 
 ## Usage
 
-1. Clone or download the script.
+1. [Clone](https://github.com/mursalatul/shutdown-timer-for-windows.git) or [download](https://github.com/mursalatul/shutdown-timer-for-windows/archive/refs/heads/master.zip) the script.
 2. Run the script in a Python environment.
 3. Choose the shutdown method:
    - Enter `1` to schedule a shutdown at a specific time.

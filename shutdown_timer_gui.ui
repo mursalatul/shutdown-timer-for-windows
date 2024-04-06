@@ -138,9 +138,10 @@
    </property>
    <widget class="QMenu" name="menu_App">
     <property name="title">
-     <string>App</string>
+     <string>Menu</string>
     </property>
-    <addaction name="actionadfd"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionExit_2"/>
    </widget>
    <addaction name="menu_App"/>
   </widget>
@@ -155,7 +156,39 @@
     <string>fd</string>
    </property>
   </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionExit_2">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionExit_2</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>144</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

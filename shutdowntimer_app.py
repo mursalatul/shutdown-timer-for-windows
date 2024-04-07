@@ -7,8 +7,8 @@ class MainUI(QtWidgets.QMainWindow):
         super(MainUI, self).__init__()
         loadUi('shutdown_timer_gui.ui', self)
         # find start button
-        self.start_bnt = self.findChild(QtWidgets.QPushButton, 'start_button')
-        self.start_bnt.clicked.connect(self.start_button_event)
+        self.start_btn = self.findChild(QtWidgets.QPushButton, 'start_button')
+        self.start_btn.clicked.connect(self.start_button_event)
     
     def start_button_event(self):
         """
@@ -17,22 +17,33 @@ class MainUI(QtWidgets.QMainWindow):
         print("start button pressed")
         tm = 1
         per_increase_delay = (tm * 60) / 100
-        self.start_progress_bar(10)
+        self.start_progress_bar(per_increase_delay)
 
     def start_progress_bar(self, per_increase_delay):
         """
         trigger the progress bar
         """
-        # find progress barr
+        # find progress bar
         self.progress_bar = self.findChild(QtWidgets.QProgressBar, 'progressBar')
-        
-        # start the progressBar
-        while self.progress_bar.value() < 100:
-            QtCore.QTimer(self).start(per_increase_delay * 1000)
-            self.progress_bar.setValue(self.progress_bar.value() + 1)
+
+        # Create a timer
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.increment_progress)
+        self.timer.start(per_increase_delay * 1000)  # Convert seconds to milliseconds
+
+    def increment_progress(self):
+        """
+        Increment the progress bar value
+        """
+        current_value = self.progress_bar.value()
+        if current_value < 100:
+            self.progress_bar.setValue(current_value + 1)
+        else:
+            # Progress completed, stop the timer
+            self.timer.stop()
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     ui = MainUI()
     ui.show()
-    app.exec()
+    sys.exit(app.exec_())

@@ -96,7 +96,7 @@
      </layout>
     </item>
     <item row="2" column="0" alignment="Qt::AlignHCenter">
-     <widget class="QPushButton" name="start">
+     <widget class="QPushButton" name="start_button">
       <property name="enabled">
        <bool>true</bool>
       </property>

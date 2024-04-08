@@ -3,6 +3,8 @@ from PyQt5.uic import loadUi
 import sys
 
 class MainUI(QtWidgets.QMainWindow):
+    # true when start button is clicked
+    process_started = False
     def __init__(self):
         super(MainUI, self).__init__()
         loadUi('shutdown_timer_gui.ui', self)
@@ -14,10 +16,26 @@ class MainUI(QtWidgets.QMainWindow):
         """
         handle start button
         """
-        print("start button pressed")
-        tm = 1
-        per_increase_delay = (tm * 60) / 100
-        self.start_progress_bar(per_increase_delay)
+        # start button
+        if not self.process_started:
+            # setting Stop button
+            self.process_started = True
+            self.start_btn.setText("Stop")
+            self.start_btn.setStyleSheet("background-color: #ff5454;") # semi-red
+
+            tm = 1
+            per_increase_delay = (tm * 60) / 100
+            self.start_progress_bar(per_increase_delay)
+        
+        # stop button
+        else:
+            # setting start button
+            self.process_started = False
+            self.start_btn.setText("Start")
+            self.start_btn.setStyleSheet("background-color: #ba8cff;") # semi-purple blue
+
+            # stop to prograss bar
+            self.timer.stop()
 
     def start_progress_bar(self, per_increase_delay):
         """

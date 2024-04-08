@@ -100,6 +100,9 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(186, 140, 255);</string>
+      </property>
       <property name="text">
        <string>Start</string>
       </property>

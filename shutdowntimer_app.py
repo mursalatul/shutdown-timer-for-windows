@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.uic import loadUi
 import sys
+import os
 
 class MainUI(QtWidgets.QMainWindow):
     # true when start button is clicked
@@ -86,8 +87,7 @@ class MainUI(QtWidgets.QMainWindow):
         """
         if value == 100:
             """shutdown command"""
-            # os.system("shutdown /s /t 1")
-            print("command executed")
+            os.system("shutdown /s /t 1")
 
     def increment_progress(self):
         """

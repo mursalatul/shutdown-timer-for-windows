@@ -1,4 +1,3 @@
-from pkgutil import get_data
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.uic import loadUi
 import sys
@@ -29,6 +28,9 @@ class MainUI(QtWidgets.QMainWindow):
         self.spinbox = self.findChild(QtWidgets.QSpinBox, 'spinBox')
         self.timeedit = self.findChild(QtWidgets.QTimeEdit, 'timeEdit')
 
+        # find progress bar
+        self.progress_bar = self.findChild(QtWidgets.QProgressBar, 'progressBar')
+ 
     def start_button_event(self):
         """
         handle start button
@@ -41,10 +43,10 @@ class MainUI(QtWidgets.QMainWindow):
             self.start_btn.setStyleSheet("background-color: #ff5454;") # semi-red
 
             # disable the After & At buttons
-            self.button_status_change([self.at_btn, self.after_btn], False)
+            self.on_off_widget([self.at_btn, self.after_btn, self.spinbox, self.timeedit], False)
 
-            # get_data will refresh shutdown_after_minutes
-            self.get_data()
+            # update_shutdown_after_minutes will refresh shutdown_after_minutes
+            self.update_shutdown_after_minutes()
 
             # calculating the time need for increase 1% in the progress bar
             per_increase_delay = (self.shutdown_after_minutes * 60) / 100
@@ -60,7 +62,7 @@ class MainUI(QtWidgets.QMainWindow):
             self.start_btn.setStyleSheet("background-color: #ba8cff;") # semi-purple blue
 
             # disable the After & At buttons
-            self.button_status_change([self.at_btn, self.after_btn], True)
+            self.on_off_widget([self.at_btn, self.after_btn, self.spinbox, self.timeedit], True)
 
             # stop to prograss bar
             self.timer.stop()
@@ -69,8 +71,6 @@ class MainUI(QtWidgets.QMainWindow):
         """
         trigger the progress bar
         """
-        # find progress bar
-        self.progress_bar = self.findChild(QtWidgets.QProgressBar, 'progressBar')
 
         # Create a timer
         self.timer = QtCore.QTimer()
@@ -100,7 +100,7 @@ class MainUI(QtWidgets.QMainWindow):
             # Progress completed, stop the timer
             self.timer.stop()
 
-    def button_status_change(self, list_of_buttons: list, status: bool) -> None:
+    def on_off_widget(self, list_of_buttons: list, status: bool) -> None:
         """
         disable all the buttons in the list_of_buttons.
         here list_of_buttons will be a list so that at
@@ -111,26 +111,37 @@ class MainUI(QtWidgets.QMainWindow):
             btn.setEnabled(status)
             btn.setEnabled(status)
 
-    def get_data(self):
+    def update_shutdown_after_minutes(self):
         """
-        get used inputed data from spinbox / timeedit
+        get used inputed data from spinbox / timeedit.
+        also this will reset the progressbar when minute change
         """
+        # get the value
+        minutes = None
         if self.after_btn.isChecked():
-            self.shutdown_after_minutes = self.spinbox.value()
+            minutes = self.spinbox.value()
         else:
-            self.shutdown_after_minutes = round(self.minutes_left_to_time(self.timeedit))
-            
+            minutes = round(self.minutes_left_to_time(self.timeedit))
+        
+        # if minutes changes then progress bar will be reset
+        if minutes != self.shutdown_after_minutes:
+            self.progress_bar.reset()
+        
+        #updating
+        self.shutdown_after_minutes = minutes
+    
     def minutes_left_to_time(self, time_edit):
         # Get the current time
         current_time = QtCore.QTime.currentTime()
         # Get the time set in the QTimeEdit widget
         selected_time = time_edit.time()
+        
         # Calculate the difference in minutes between the current time and the selected time
         minutes_difference = current_time.secsTo(selected_time) / 60
+
         return minutes_difference
 
-    def execute_command(self):
-        print("command")
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     ui = MainUI()

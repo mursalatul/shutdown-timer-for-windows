@@ -54,10 +54,20 @@
           <property name="text">
            <string>After</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox"/>
+         <widget class="QSpinBox" name="spinBox">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>1440</number>
+          </property>
+         </widget>
         </item>
         <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="label">

@@ -45,13 +45,10 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="after">
+         <widget class="QRadioButton" name="radioButton_After">
           <property name="font">
            <font>
-            <family>Sitka Subheading Semibold</family>
             <pointsize>11</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -74,13 +71,10 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="at">
+         <widget class="QRadioButton" name="radioButton_At">
           <property name="font">
            <font>
-            <family>Sitka Subheading Semibold</family>
             <pointsize>11</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
            </font>
           </property>
           <property name="text">

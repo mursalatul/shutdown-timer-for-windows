@@ -76,6 +76,18 @@ class MainUI(QtWidgets.QMainWindow):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.increment_progress)
         self.timer.start(per_increase_delay * 1000)  # Convert seconds to milliseconds
+        
+        # Connect the valueChanged signal of the progress bar to the slot function
+        self.progress_bar.valueChanged.connect(self.check_progress)
+    
+    def check_progress(self, value):
+        """
+        Check if progress bar value is 100%
+        """
+        if value == 100:
+            """shutdown command"""
+            # os.system("shutdown /s /t 1")
+            print("command executed")
 
     def increment_progress(self):
         """
@@ -117,6 +129,8 @@ class MainUI(QtWidgets.QMainWindow):
         minutes_difference = current_time.secsTo(selected_time) / 60
         return minutes_difference
 
+    def execute_command(self):
+        print("command")
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     ui = MainUI()

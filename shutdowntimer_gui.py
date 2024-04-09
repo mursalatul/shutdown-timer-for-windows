@@ -12,7 +12,7 @@ class MainUI(QtWidgets.QMainWindow):
 
     def __init__(self):
         super(MainUI, self).__init__()
-        loadUi('shutdown_timer_gui.ui', self)
+        loadUi('main_interface.ui', self)
 
         # resize the window in raw code cause in .ui the size can conflict with the system
         self.resize(400, 400)
